@@ -1,0 +1,25 @@
+{
+  "test": {
+    "_all": {
+            "index_analyzer": "ngram_analyzer",
+            "search_analyzer": "whitespace_analyzer"
+         },
+    "properties": {
+      "city": {
+        "type": "string",
+        "index_analyzer": "ngram_analyzer",
+        "search_analyzer": "standard"
+      },
+       "state": {
+        "type": "string",
+        "index_analyzer": "ngram_analyzer",
+        "search_analyzer": "standard"
+      },
+       "zip": {
+        "type": "string",
+        "index_analyzer": "ngram_analyzer",
+        "search_analyzer": "standard"
+      }
+    }
+  }
+}

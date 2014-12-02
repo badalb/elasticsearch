@@ -1,0 +1,53 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css"></link>
+<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+</head>
+<body>
+	<h2>Hello World!</h2>
+	<table>
+		<tr>
+			<td>Enter Your Search Criteria: <input type="text" name="textb" autocomplete="on"
+				id="textb" value=""> </input>
+			</td>
+		</tr>
+	</table>
+</body>
+<script type="text/javascript">
+$(document).ready(function(){
+	   // alert("2");
+	    
+	    $( "#textb" ).autocomplete({
+	    	
+	    	source: function (request, response) {
+	    		var url = "http://localhost:8080/es/search/" + $( "#textb" ).val();
+	            jQuery.getJSON(url, {
+	                query: request.term
+	            }, function (data) {
+	                // assuming data is a JavaScript array such as
+	                // ["one@abc.de", "onf@abc.de","ong@abc.de"]
+	                // and not a string
+	                var arr=[];
+	                console.log(data);
+	                $.each(data,function(item){
+	                	var obj= data[item];
+	                	console.log(obj);
+	                	var listitem ={}
+	                	listitem.value='city:' +obj.city;
+	                	listitem.label=obj.city;
+	                	console.log(listitem);
+	                	arr.push(listitem);
+	                });
+	                response(arr);
+	            });
+	        },
+	        minLength: 2
+	    });	
+		
+});
+</script>
+</html>
